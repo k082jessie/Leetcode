@@ -1,0 +1,11 @@
+from string import ascii_uppercase
+class Solution:
+    def titleToNumber(self, columnTitle: str) -> int:
+        dic = {v:k+1 for k,v in enumerate(ascii_uppercase)}
+        ans = i = 0
+        queue = collections.deque(columnTitle)
+        while queue:
+            digit = queue.pop()            
+            ans += pow(26,i) * dic[digit]         
+            i += 1
+        return ans
