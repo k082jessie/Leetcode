@@ -1,0 +1,8 @@
+from collections import Counter
+class Solution:
+    def firstUniqChar(self, s: str) -> int:
+        countMap = Counter(s)
+        for i in s:
+            if countMap[i] == 1:
+                return s.index(i)
+        return -1
