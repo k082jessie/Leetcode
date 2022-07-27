@@ -1,4 +1,15 @@
 class Solution:
     def missingNumber(self, nums: List[int]) -> int:
+        # Sum, SC: O(1)
         n = len(nums)
         return int(n * (n+1) / 2 - sum(nums))
+
+        # Xor, SC: O(n)
+        return reduce(operator.xor, nums + range(len(nums)+1))
+        
+        # Xor, SC: O(1)
+        n = len(nums)
+        return reduce(operator.xor, nums) ^ [n, 1, n+1, 0][n % 4]   
+        
+        # Set difference
+        return (set(range(len(nums)+1)) - set(nums)).pop()
