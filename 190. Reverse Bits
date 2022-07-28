@@ -3,3 +3,23 @@ class Solution:
         oriBin = '{:032b}'.format(n)
         reverseBin = oriBin[::-1]
         return int(reverseBin,2)
+        
+    # Bit Manipulation
+        res    = 0
+        for i in range(32):
+            if n&1:
+                res += 1 << (31-i)
+            n >>= 1
+        return res
+        
+    # String Padding
+        n = bin(n)[2:]         # convert to binary, and remove the usual 0b prefix
+        n = '%32s' % n         # print number into a pre-formatted string with space-padding
+        n = n.replace(' ','0') # Convert the useful space-padding into zeros
+        # Now we have a  proper binary representation, so we can make the final transformation
+        return int(n[::-1],2)
+        
+    # High-speed code
+        n = bin(n)[2:]
+        n = '0'*( 32-len(n) ) + n
+        return int( n[::-1] ,2)
