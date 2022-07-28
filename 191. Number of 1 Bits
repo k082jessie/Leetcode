@@ -1,0 +1,18 @@
+class Solution:
+    def hammingWeight(self, n: int) -> int:
+        oriBit = '{:32b}'.format(n)
+        ans = 0
+        for i in oriBit: 
+            if i=='1': 
+                ans+=1
+        return ans
+        
+    # Counter
+        return collections.Counter(bin(n)[2:]).get("1")
+    
+    # Bit Manipulation
+        count = 0
+        while n:
+            if n & 1: count += 1
+            n = n >> 1
+        return count
