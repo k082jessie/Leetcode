@@ -5,7 +5,7 @@ class Solution:
         return int(reverseBin,2)
         
     # Bit Manipulation
-        res    = 0
+        res = 0
         for i in range(32):
             if n&1:
                 res += 1 << (31-i)
