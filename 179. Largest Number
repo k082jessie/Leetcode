@@ -1,0 +1,10 @@
+from itertools import permutations
+class Solution:
+    def largestNumber(self, nums: List[int]) -> str:
+        # TLE
+        ans = []
+        for i in permutations(nums, len(nums)):
+            ans.append("".join(map(str,i)))
+        return max(ans)
+        
+        #https://leetcode.com/problems/largest-number/discuss/53298/Python-different-solutions-(bubble-insertion-selection-merge-quick-sorts).
