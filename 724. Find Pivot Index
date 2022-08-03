@@ -1,0 +1,22 @@
+ class Solution:
+    def pivotIndex(self, nums: List[int]) -> int:       
+        #TLE, use pivot to seperate left and right
+        sumL = sumR = 0
+        for i in range(len(nums)):
+            sumL = sum(nums[:i])
+            sumR = sum(nums[i+1:])
+            if sumL == sumR:
+                return i
+        return -1
+        
+        # mine II
+        sumL = 0
+        sumR = sum(nums)
+        for i in range(len(nums)):
+            if i > 0:
+                sumL += nums[i-1]                
+            sumR -= nums[i]
+
+            if sumL == sumR:
+                return i
+        return -1
