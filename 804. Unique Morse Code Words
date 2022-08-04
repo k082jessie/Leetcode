@@ -1,0 +1,20 @@
+class Solution:
+    def uniqueMorseRepresentations(self, words: List[str]) -> int:
+        MORSE_CODE_DICT = { 'a':'.-', 'b':'-...',
+                    'c':'-.-.', 'd':'-..', 'e':'.',
+                    'f':'..-.', 'g':'--.', 'h':'....',
+                    'i':'..', 'j':'.---', 'k':'-.-',
+                    'l':'.-..', 'm':'--', 'n':'-.',
+                    'o':'---', 'p':'.--.', 'q':'--.-',
+                    'r':'.-.', 's':'...', 't':'-',
+                    'u':'..-', 'v':'...-', 'w':'.--',
+                    'x':'-..-', 'y':'-.--', 'z':'--..'}
+       
+        morseList = []
+        for word in words:
+            morse = ""
+            for char in word:
+                morse += MORSE_CODE_DICT[char]
+            morseList.append(morse)
+
+        return len(set(morseList))
