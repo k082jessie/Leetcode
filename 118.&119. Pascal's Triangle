@@ -1,3 +1,4 @@
+### 118
 class Solution:
     def generate(self, numRows: int) -> List[List[int]]:
         ans = tmp = []
@@ -15,3 +16,14 @@ class Solution:
             for j in range(1,i):
                 pascal[i][j] = pascal[i-1][j-1] + pascal[i-1][j]
         return pascal
+
+### 119
+class Solution:
+    def getRow(self, rowIndex: int) -> List[int]:
+        ans = []
+        for i in range(rowIndex+1):
+            if i == 0:
+                ans = [1]
+            else:
+                ans = [1] + [ans[x]+ans[x+1] for x in range(len(ans)-1)] + [1]
+        return ans
