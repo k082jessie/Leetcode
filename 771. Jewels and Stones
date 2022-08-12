@@ -1,0 +1,16 @@
+class Solution:
+    def numJewelsInStones(self, jewels: str, stones: str) -> int:
+        ans = 0
+        for char in stones:
+            if char in jewels:
+                ans += 1
+        return ans
+        
+        # Other Solution I
+        return sum(map(J.count, S))
+        
+        # II
+        return sum(map(S.count, J))               # this one after seeing https://discuss.leetcode.com/post/244105
+        
+        # III
+        return sum(s in J for s in S)
