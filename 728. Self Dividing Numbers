@@ -1,0 +1,12 @@
+class Solution:
+    def selfDividingNumbers(self, left: int, right: int) -> List[int]:
+        def isDiv(i):
+            num = i
+            while i:
+                rem = i % 10
+                if rem == 0 or num % rem != 0:
+                    return False
+                i //= 10
+            return True
+
+        return [i for i in range(left, right+1) if isDiv(i)]
