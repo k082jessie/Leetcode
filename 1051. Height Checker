@@ -1,0 +1,10 @@
+class Solution:
+    def heightChecker(self, heights: List[int]) -> int:
+        counter = 0
+        for i,j in zip(heights, sorted(heights)):
+            if i!=j:
+                counter+=1
+        return counter
+        
+        # Other Solution
+        return sum(h1 != h2 for h1, h2 in zip(heights, sorted(heights)))
