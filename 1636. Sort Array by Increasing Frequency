@@ -1,0 +1,26 @@
+class Solution:
+    def frequencySort(self, nums: List[int]) -> List[int]:
+        lookup = defaultdict(set)
+        for i in set(nums):
+            lookup[nums.count(i)].add(i)
+
+        ans = []
+        for c, v in sorted(lookup.items()):
+            for i in sorted(v, reverse=True):
+                for _ in range(c):
+                    ans.append(i)
+        return ans
+        
+        # return [i for c, v in sorted(lookup.items()) for i in sorted(v, reverse=True) for _ in range(c)]
+        
+        # Other Solution
+        r = Counter(nums).most_common()
+        r.sort(key = lambda x: x[0], reverse=True)
+        r.sort(key = lambda x: x[1])
+        
+        t = []
+        for i in r:
+            a, b = i
+            t.extend([a]*b)
+            
+        return t
