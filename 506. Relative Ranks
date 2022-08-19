@@ -1,0 +1,19 @@
+class Solution:
+    def findRelativeRanks(self, score: List[int]) -> List[str]:
+        ans = []
+        for num in score:
+            rank = sorted(score, reverse=True).index(num) + 1
+            if rank == 1:
+                prize = "Gold Medal"
+            elif rank == 2:
+                prize = "Silver Medal"
+            elif rank == 3:
+                prize = "Bronze Medal"
+            else:
+                prize = str(rank)
+            ans.append(prize)
+        return ans
+        
+        # Other Solution
+        rank = {n:i>2 and str(i+1) or ["Gold","Silver","Bronze"][i]+' Medal' for i,n in enumerate(sorted(score,reverse=True))}
+        return [rank[num] for num in score]
