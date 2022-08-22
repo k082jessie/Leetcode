@@ -1,0 +1,11 @@
+class Solution:
+    def sortByBits(self, arr: List[int]) -> List[int]:
+        lookup = defaultdict(list)
+        for i in sorted(arr):
+            lookup["{0:b}".format(i).count('1')].append(i)
+        return [digit for i, v in sorted(lookup.items()) for digit in v]
+        
+        # Other Solution
+        temp = [[i.bit_count(), i] for i in arr]
+        temp.sort()
+        return [x[1] for x in temp]
