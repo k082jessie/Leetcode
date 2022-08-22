@@ -1,0 +1,18 @@
+class Solution:
+    def kthDistinct(self, arr: List[str], k: int) -> str:
+        counter = 1
+        for i in arr:
+            if arr.count(i) == 1:
+                if counter == k:
+                    return i
+                counter += 1
+        return ""
+        
+        # Other Solution
+        d = Counter(arr)
+        for i in d:
+            if d[i] == 1:
+                k -= 1
+                if k == 0:
+                    return i
+        return ''
