@@ -1,0 +1,20 @@
+class Solution:
+    def largestAltitude(self, gain: List[int]) -> int:
+        curAl = 0
+        ans = []
+        ans.append(curAl)
+
+        for i in gain:
+            curAl += i
+            ans.append(curAl)
+        return max(ans)
+        
+        # mine - I
+        res = cur = 0
+        for g in gain:
+            cur += g
+            res = max(res, cur)
+        return res
+        
+        # Other Solution
+        return max(accumulate(gain, initial=0))
