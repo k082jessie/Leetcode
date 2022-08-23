@@ -1,0 +1,42 @@
+class Solution:
+    def nextGreatestLetter(self, letters: List[str], target: str) -> str:
+        if ord(target) >= ord(letters[-1]):
+            return letters[0]
+        elif target in letters:
+            tarIdx = [i for i in range(len(letters)) if letters[i] == target][-1]
+            return letters[tarIdx+1]
+        else:
+            l, r = 0, len(letters)-1
+            while l<r:
+                mid = (l+r) // 2
+                if ord(target) < ord(letters[mid]):
+                    r = mid
+                if ord(target) > ord(letters[mid]):
+                    l = mid+1
+            return letters[l]
+            
+        # Other Solution
+        letters_length = len(letters)
+        low, high = 0, len(letters) - 1
+        
+		    # target is outside the bounds of letters
+		    # because the array is circular, this means that the next greatest value 
+		    # must be the first value in the array. If the value is within the bounds
+		    # of the array we can perform our regular modified binary search
+        if target < letters[low] or target >= letters[high]:
+            return letters[low]
+
+        while low <= high:
+            middle =  (low + high) // 2
+            candidate = letters[middle]
+            
+            if target < candidate: 
+                high = middle - 1
+            
+			      # becuase we're looking for the smallest value thats greater then the target
+			      # we can condense the typical case where target == letters[middle] into the 
+			      # the target > letters[middle] case
+            if target >= candidate :
+                low = middle + 1
+        
+        return letters[low]
