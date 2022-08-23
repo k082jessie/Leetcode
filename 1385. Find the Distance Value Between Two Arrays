@@ -1,0 +1,31 @@
+class Solution:
+    def findTheDistanceValue(self, arr1: List[int], arr2: List[int], d: int) -> int:
+        ans = 0
+        for i in arr1:
+            for j in arr2:
+                if abs(i-j) <= d:
+                    ans -= 1
+                    break
+            ans += 1
+        return ans
+        
+        # Other Solution - I
+        return sum(all(abs(a - b) > d for b in arr2) for a in arr1)
+        
+        # Other Solution - II
+        return sum(abs(a - arr3[min(len(arr3) - 1, bisect.bisect_left(arr3, a - d))]) > d for arr3 in [sorted(arr2)] for a in arr1)
+        
+        # Other Solution - II(clear)
+        arr2.sort()
+        m = len(arr2)
+        distance_value = 0
+        
+        for a in arr1:
+            index = bisect.bisect_left(arr2, a - d)
+            index = min(m - 1, index)
+            b = arr2[index]
+            
+            if abs(a - b) > d:
+                distance_value += 1
+        
+        return distance_value
