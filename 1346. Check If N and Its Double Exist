@@ -1,0 +1,21 @@
+class Solution:
+    def checkIfExist(self, arr: List[int]) -> bool:
+        for i in arr:
+            if (i != 0 and i*2 in arr) or (i == 0 and len([j for j in arr if j == 0]) > 1):
+                return True
+        return False
+        
+        # Other Solution - I
+        if arr.count(0) > 1: return True
+        S = set(arr) - {0}
+        for i in S:
+            if 2*i in S: return True
+        return False
+        
+        # Other Solution - II(faster)
+        double_single_set = set()
+        for n in arr:
+            if n in double_single_set: return True
+            double_single_set.add(n * 2)
+            double_single_set.add(n / 2)
+        return False
