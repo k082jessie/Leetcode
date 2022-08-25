@@ -1,0 +1,29 @@
+class Solution:
+    def countGoodSubstrings(self, s: str) -> int:
+        ans = 0
+        for i in range(len(s)-2):
+            if len(set(s[i:i+3])) == 3:
+                ans += 1
+        return ans
+        # return sum(len(set(s[i:i+3])) == 3 for i in range(len(s)-2))
+        
+        # Other Solution - Sliding Window(not extremely quick)
+        k = 3
+        if k > len(s):
+            return 0
+        
+        letter_frequency = {}
+        count, windowStart = 0, 0
+        for windowEnd in range(len(s)):
+            if s[windowEnd] not in letter_frequency:
+                letter_frequency[s[windowEnd]] = 0
+            letter_frequency[s[windowEnd]] += 1
+            
+            if windowEnd >= k - 1:
+                if len(letter_frequency) == k:
+                    count+=1
+                letter_frequency[s[windowStart]] -= 1
+                if letter_frequency[s[windowStart]] ==0:
+                    del letter_frequency[s[windowStart]]
+                windowStart += 1
+        return count
