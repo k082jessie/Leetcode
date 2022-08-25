@@ -1,0 +1,27 @@
+class Solution:
+    def rearrangeCharacters(self, s: str, target: str) -> int:
+        lookup = defaultdict(int)
+        for char in set(target):
+            lookup[char] = 0
+        for char in s:
+            if char in target:
+            # if char in lookup.keys():
+                lookup[char] += 1
+
+        for i, v in lookup.items():
+            lookup[i] = v // target.count(i)
+
+        if len(lookup.keys()) == len(set(target)):
+            return min(lookup.values())
+        # return 0
+        
+        # Other Solution
+        count1 = Counter(target)
+        count2 = Counter(s)
+        
+        s = inf
+        for char in count1:
+            if char not in count2:
+                return 0
+            s = min(s, count2[char]//count1[char])
+        return s
