@@ -1,0 +1,9 @@
+class Solution:
+    def countWords(self, words1: List[str], words2: List[str]) -> int:
+        ans = 0
+        for i in set(words1) & set(words2):
+        # for i in set(words1):
+            if words1.count(i) == words2.count(i) == 1:
+                ans += 1
+        return ans
+        # return sum(words1.count(i) == words2.count(i) == 1 for i in set(words1) & set(words2))
