@@ -1,0 +1,25 @@
+class Solution:
+    def sumOfLeftLeaves(self, root: Optional[TreeNode]) -> int:
+        if not root.left and not root.right:
+            return 0
+    
+        res = 0
+        stack = [(root,0)]
+        while stack:
+            curr, flag = stack.pop()
+            if not curr.left and not curr.right and flag==1:
+                res += curr.val
+            if curr.right:
+                stack.append((curr.right, 0))
+            if curr.left:
+                stack.append((curr.left, 1))
+        return res
+        
+        # Other Solution
+        def traverse(root, isLeft):
+            if root is None:
+                return 0
+            if root.left is None and root.right is None and isLeft:
+                return root.val
+            return traverse(root.left,True) + traverse(root.right,False)
+        return traverse(root,False)
