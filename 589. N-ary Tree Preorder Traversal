@@ -7,7 +7,7 @@
         while stack:
             node = stack.pop()
             res.append(node.val)
-            stack.extend(node.children[::-1])         ### run time: 51ms
+            stack.extend(node.children[::-1])         ### run time: 51ms, ATTENTION!!! use stack => reverse series nodes
             #if node.children:                        ### run time: 117ms
             #    for child in node.children[::-1]:
             #        stack.append(child)
