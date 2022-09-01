@@ -1,0 +1,42 @@
+class Solution:
+    def maxDepth(self, root: 'Node') -> int:
+        if not root:
+            return 0
+        
+        maxDepth = 0
+        queue = collections.deque()
+        queue.append((root, 1))
+        while queue:
+            node, level = queue.popleft()
+            if node.children:
+                for child in node.children:
+                    queue.append((child, level+1))
+            maxDepth = level
+        return maxDepth
+        
+        
+        # Other Solution - Recursion
+        if not root: return 0
+        return 1 + max(map(self.maxDepth, root.children or [None]))
+        
+        
+        # Other Solution - BFS + queue
+        queue = []
+        if root: queue.append((root, 1))
+        depth = 0
+        for (node, level) in queue:
+            depth = level
+            queue += [(child, level+1) for child in node.children]
+        return depth
+        
+        
+        # Other Solution - DFS + stack        
+        stack = []
+        if root: stack.append((root, 1))
+        depth = 0
+        while stack:
+            (node, d) = stack.pop()
+            depth = max(depth, d)
+            for child in node.children:
+                stack.append((child, d+1))
+        return depth
