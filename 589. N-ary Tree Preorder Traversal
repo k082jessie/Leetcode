@@ -1,0 +1,27 @@
+    def preorder(self, root: 'Node') -> List[int]:
+        if not root:
+            return []
+        
+        res = []
+        stack = [root]
+        while stack:
+            node = stack.pop()
+            res.append(node.val)
+            stack.extend(node.children[::-1])         ### run time: 51ms
+            #if node.children:                        ### run time: 117ms
+            #    for child in node.children[::-1]:
+            #        stack.append(child)
+        return res
+        
+        # Other Solution - Recursion
+        output =[]
+        self.dfs(root, output)
+        return output
+    
+      def dfs(self, root, output):
+          if root is None:
+              return
+              
+          output.append(root.val)
+          for child in root.children:
+              self.dfs(child, output)
