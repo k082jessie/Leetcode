@@ -1,0 +1,21 @@
+    def postorder(self, root: 'Node') -> List[int]:
+        if not root:
+            return []
+        res = []
+        stack = [root]
+        while stack:
+            node = stack.pop()
+            stack.extend(node.children)
+            res.append(node.val)
+        return res[::-1]
+        
+        # Other Solution - Recursion
+        def rec(root):
+            if root:
+                for c in root.children:
+                    rec(c)
+                out.append(root.val)
+
+        out = []
+        rec(root)
+        return out
