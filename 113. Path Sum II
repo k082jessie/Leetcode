@@ -1,0 +1,15 @@
+    def pathSum(self, root: Optional[TreeNode], targetSum: int) -> List[List[int]]:
+        def dfs(curNode, targetSum, curPath, res):
+            if not curNode:
+                return []
+            curPath.append(curNode.val)
+            if targetSum == curNode.val and not curNode.left and not curNode.right:
+                res.append(list(curPath))
+            else:
+                targetSum -= curNode.val
+                dfs(curNode.left, targetSum, curPath, res)
+                dfs(curNode.right, targetSum, curPath, res)
+            curPath.pop()
+        res = []
+        dfs(root, targetSum, [], res)
+        return res
