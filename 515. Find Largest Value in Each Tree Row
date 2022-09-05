@@ -1,0 +1,48 @@
+    def largestValues(self, root: Optional[TreeNode]) -> List[int]:
+        if not root:
+            return []
+        
+        queue = collections.deque()
+        queue.append((root, 1))
+        lookup = defaultdict(list)
+        while queue:
+            for _ in range(len(queue)):
+                node, level = queue.popleft()
+                lookup[level].append(node.val)
+                if node.left:
+                    queue.append((node.left, level+1))
+                if node.right:
+                    queue.append((node.right, level+1))
+
+        return [max(v) for i, v in lookup.items()]
+        
+        
+        # Other Solution - DFS
+        res = []
+        def dfs(node=root, level=0):
+          if not node:
+            return
+          if len(res)-1 < level:
+            res.append(node.val)
+          else:
+            res[level] = max(node.val, res[level])
+          dfs(node.left, level+1)
+          dfs(node.right, level+1)
+        dfs()
+        return res
+        
+        
+        # Other Solution - BFS
+        queue = deque([root])
+        res = []
+        while queue:
+            max_ = float('-inf')
+            for _ in range(len(queue)):
+                node = queue.popleft()
+                if not node:
+                    continue
+                max_ = max(max_, node.val)
+                queue.extend([node.left, node.right])
+            if max_ != float('-inf'):
+                res.append(max_)
+        return res
