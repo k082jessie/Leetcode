@@ -1,0 +1,65 @@
+class Solution:
+    def sumNumbers(self, root: Optional[TreeNode]) -> int:
+        def helper(curNode, curPath, allPath):
+            stack = [curNode]
+            while stack:
+                node = stack.pop()
+                curPath.append(node.val)
+                if not node.left and not node.right:
+                    allPath.append(list(curPath))
+                if node.left:
+                    helper(node.left, curPath, allPath)
+                if node.right:
+                    helper(node.right, curPath, allPath)
+                curPath.pop()
+        allPath = []
+        helper(root, [], allPath)
+        return sum(int(''.join(map(str, subList))) for subList in allPath)
+        
+        
+        # Other Solution - DFS recursive
+        self.res = 0
+        self.dfs(root, 0)
+        return self.res
+    
+    def dfs(self, root, path):
+        if root:
+            if not root.left and not root.right:
+                path = path*10 + root.val
+                self.res += path
+            self.dfs(root.left, path*10+root.val)
+            self.dfs(root.right, path*10+root.val)
+            
+            
+        # Other Solution - BFS + queue
+        deque, res = collections.deque(), 0
+        if root:
+            deque.append(root)
+        while deque:
+            node = deque.popleft()
+            if not node.left and not node.right:
+                res += node.val
+            if node.left:
+                node.left.val += node.val*10
+                deque.append(node.left)
+            if node.right:
+                node.right.val += node.val*10
+                deque.append(node.right)
+        return res
+        
+        
+        # Other Solution - DFS + stack
+        stack, res = [], 0
+        if root:
+            stack.append(root)
+        while stack:
+            node = stack.pop()
+            if not node.left and not node.right:
+                res += node.val
+            if node.right:
+                node.right.val += node.val*10
+                stack.append(node.right)
+            if node.left:
+                node.left.val += node.val*10
+                stack.append(node.left)
+        return res
