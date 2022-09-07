@@ -1,0 +1,36 @@
+    def totalFruit(self, fruits: List[int]) -> int:
+        # Sliding window
+        start = 0
+        length = 0
+        maxLen = 0
+        basket = {}
+        for end in range(len(fruits)):
+            curFruit = fruits[end]
+            basket[curFruit] = basket.get(curFruit, 0)+1
+            length += 1
+            while len(basket) > 2:
+                remove = fruits[start]
+                basket[remove] -= 1
+                if basket[remove] == 0:
+                    del basket[remove]
+                start += 1
+                length -= 1
+            maxLen = max(maxLen, length)
+        return maxLen
+        
+        # Other Solution
+        n = len(fruits)
+        if len(Counter(fruits))<3:
+            return n
+
+        dic = defaultdict(int)
+        res, start= 0,0
+        for end in range(n):
+            dic[fruits[end]]+=1
+            while len(dic)>2:
+                dic[fruits[start]]-=1
+                if dic[fruits[start]]==0:
+                    del dic[fruits[start]]
+                start+=1
+            res = max(res,end-start+1)
+        return max(res,n-start)
