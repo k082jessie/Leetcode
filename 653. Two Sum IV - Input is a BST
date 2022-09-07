@@ -1,0 +1,28 @@
+    def findTarget(self, root: Optional[TreeNode], k: int) -> bool:
+        seen = []
+        queue = collections.deque()
+        queue.append(root)
+        while queue:
+            node = queue.popleft()
+            if node.val not in seen:
+                seen.append(k-node.val)
+            else:
+                return True
+            if node.left:
+                queue.append(node.left)
+            if node.right:
+                queue.append(node.right)
+        return False
+        
+        
+        # Other Solution
+        numbs = set()
+        def dfs(root):
+            if not root:
+                return False
+            if k - root.val in numbs:
+                return True
+            numbs.add(root.val)
+            return dfs(root.left) or dfs(root.right)
+            
+        return dfs(root)
