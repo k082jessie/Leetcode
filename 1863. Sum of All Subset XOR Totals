@@ -1,0 +1,8 @@
+    def subsetXORSum(self, nums: List[int]) -> int:
+        res = 0
+        
+        #start from 0 will crash at reduce function
+        for i in range(1, len(nums)+1):                     
+            for arr in itertools.combinations(nums, i):
+                res += functools.reduce(lambda x, y: x ^ y, list(arr))
+        return res
